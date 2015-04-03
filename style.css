@@ -1,0 +1,72 @@
+/* Styles go here */
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Roboto;
+  background-color: #ECECEC;
+  padding: 5px;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+.tiles {
+  padding: 10px;
+}
+
+.tiles li {
+  list-style: none;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 4px lightgray;
+  position: relative;
+  padding-left: 75px;
+}
+
+.tiles h3 {
+  margin-bottom: 3px;
+  width: 100%;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 65px;
+  background-color: #42b6ff;
+  /* transition: 0.1s linear all; */
+}
+
+.image:hover {
+  opacity: 0.8;
+  background-color: black;
+}
+
+#feed-url {
+  padding: 10px;
+  width: 100%;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+.tiles li p {
+  color: #606060;
+}
+
+.url {
+  color: gray;
+}
+
+.visited {
+  opacity: 0.65;
+}
