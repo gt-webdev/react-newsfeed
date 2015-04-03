@@ -2,7 +2,7 @@
 var FeedInput = React.createClass({
 	render: function() {
 		return(
-			<h1>Feed URL input box</h1>
+			<input type="text" id="feed-url" placeholder="Feed URL" />
 		);
 	}
 });
@@ -11,9 +11,9 @@ var ArticleCard = React.createClass({
 	render: function() {
 		return (
 			<li>
-				<div>Image</div>
+				<div className="image"></div>
 				<h3>React Native</h3>
-				<p>Author</p>
+				<p>Author / <span className="url">example.com</span></p>
 			</li>
 		);
 	}
@@ -23,7 +23,7 @@ var ArticleCard = React.createClass({
 var UnreadArticles = React.createClass({
 	render: function() {
 		return(
-			<ul>
+			<ul className="tiles">
 				<ArticleCard />
 			</ul>
 		);
@@ -34,7 +34,7 @@ var UnreadArticles = React.createClass({
 var ReadArticles = React.createClass({
 	render: function() {
 		return(
-			<ul>
+			<ul className="tiles">
 				<ArticleCard />
 			</ul>
 		);
@@ -42,7 +42,7 @@ var ReadArticles = React.createClass({
 });
 
 // Lists of Articles
-var ArticlesLists = React.createClass({
+var ArticleLists = React.createClass({
 	render: function() {
 		return(
 			// TODO: Reduce duplication.
@@ -59,8 +59,9 @@ var NewsFeedComponent = React.createClass({
 	render: function() {
 		return(
 			<div>
+				<h1>Reading List</h1>
 				<FeedInput />
-				<ArticlesLists />
+				<ArticleLists />
 			</div>
 		);
 	}
