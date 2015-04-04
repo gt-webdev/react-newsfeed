@@ -40,7 +40,10 @@ var ArticleSubList = React.createClass({
 
 // Lists of Articles
 var ArticleLists = React.createClass({
-	render: function() {
+	getInitialState: function() {
+		return {read: [], unread: []};
+	},
+	componentDidMount: function() {
 		var read = [];
 		var unread = [];
 		this.props.articles.forEach(function(article) {
@@ -51,10 +54,13 @@ var ArticleLists = React.createClass({
 				unread.push(article);
 			}
 		});
+		this.setState({read: read, unread: unread});
+	},
+	render: function() {
 		return(
 			<div>
-				<ArticleSubList articles={unread} />
-				<ArticleSubList articles={read} />
+				<ArticleSubList articles={this.state.unread} />
+				<ArticleSubList articles={this.state.read} />
 			</div>
 		);
 	}
