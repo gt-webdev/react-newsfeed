@@ -1,7 +1,7 @@
 // Allows user to change rss feed that supplies articles that are shown.
 var data = [
 	{author: "Pete Hunt", title: "React Native goes live", visited: false},
-	{author: "Pete Hunt", title: "React Native goes live", visited: true}
+	{author: "Jennifer Hwang", title: "This demo works!!!", visited: true}
 ]
 var FeedInput = React.createClass({
 	render: function() {
@@ -16,7 +16,7 @@ var ArticleCard = React.createClass({
 		var classString = this.props.article.visited ? "visited" : "";
 		return (
 			<li className={classString}>
-				<div className="image"></div>
+				<div className="image" onClick={this.props.onToggleRead(this.props.article)}></div>
 				<h3>{this.props.article.title}</h3>
 				<p>{this.props.article.author} / <span className="url">example.com</span></p>
 			</li>
@@ -28,8 +28,8 @@ var ArticleCard = React.createClass({
 var ArticleSubList = React.createClass({
 	render: function() {
 		var cards = this.props.articles.map(function (article) {
-			return (<ArticleCard article={article} />);
-		});
+			return (<ArticleCard article={article} onToggleRead={this.props.onToggleRead} />);
+		}.bind(this));
 		return(
 			<ul className="tiles">
 				{cards}
@@ -43,7 +43,7 @@ var ArticleLists = React.createClass({
 	getInitialState: function() {
 		return {read: [], unread: []};
 	},
-	componentDidMount: function() {
+	setSubLists: function() {
 		var read = [];
 		var unread = [];
 		this.props.articles.forEach(function(article) {
@@ -56,11 +56,21 @@ var ArticleLists = React.createClass({
 		});
 		this.setState({read: read, unread: unread});
 	},
+	componentDidMount: function() {
+		this.setSubLists();
+	},
+	handleToggleRead: function(article) {
+		return function(e) {
+			e.preventDefault();
+			article.visited = !article.visited;
+			this.setSubLists();
+		}.bind(this);
+	},
 	render: function() {
 		return(
 			<div>
-				<ArticleSubList articles={this.state.unread} />
-				<ArticleSubList articles={this.state.read} />
+				<ArticleSubList parent={this} articles={this.state.unread} onToggleRead={this.handleToggleRead} />
+				<ArticleSubList parent={this} articles={this.state.read} onToggleRead={this.handleToggleRead} />
 			</div>
 		);
 	}
